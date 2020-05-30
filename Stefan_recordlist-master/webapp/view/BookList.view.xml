@@ -1,0 +1,95 @@
+<mvc:View
+   xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	controllerName="org.ubb.books.controller.App">
+	<Button text="Checkout A Book" class="sapUiTinyMarginEnd" press="navToDetail"/>
+
+   <Table id="idBooksTable"
+		items="{
+			path: '/RECORD_STLESet',
+			sorter: {
+				path: 'Isbn'
+			}
+		}"
+		growing="true"
+		growingThreshold="10">
+		<headerToolbar>
+								<OverflowToolbar>
+									<content>
+										<ToolbarSpacer/>
+										<SearchField
+											id="searchField"
+											width="20%"
+											placeholder="{i18n>searchFieldPlaceholder}"
+											search="onSearch"/>
+										<Button
+											id="sortDescendingButton"
+											press="onSortDescending"
+											tooltip="{i18n>sortButtonTextDescending}"
+											icon="sap-icon://arrow-bottom"/>
+										<Button
+											id="sortAscendingButton"
+											press="onSortAscending"
+											tooltip="{i18n>sortButtonTextDescending}"
+											icon="sap-icon://arrow-top"/>
+								
+										
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+	
+		<columns>
+			<Column>
+				<Text text="Checkout Record ID" />
+			</Column>
+			<Column>
+				<Text text="FirstName" />
+			</Column>
+			<Column>
+				<Text text="LastName" />
+			</Column>
+			<Column>
+				<Text text="DateCheckout" />
+			</Column>
+         <Column>
+				<Text text="DateReturn" />
+			</Column>
+			
+			<Column hAlign="Right">
+				<Text text="Action" />
+			</Column>
+		</columns>
+		
+		<items>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier
+						title="{RecordsId}"
+						text="{Isbn}"/>
+
+					<Text text="{FirstName}" />
+					<Text text="{LastName}" />
+					<Text text="{ 
+							path: 'DateCheckout',
+							type: 'sap.ui.model.type.Date'
+               			}" 
+					/>
+					<Text text="{ 
+							path: 'DateReturn',
+							type: 'sap.ui.model.type.Date'
+               			}" 
+					/>
+					<HBox justifyContent="End">
+						<Button icon="sap-icon://edit" press="onSelectUpdate"></Button>
+						<Button icon="sap-icon://delete" press="onDeleteRow"></Button>
+
+					</HBox>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	
+	
+   
+</mvc:View>
